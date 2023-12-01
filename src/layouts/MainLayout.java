@@ -4,6 +4,7 @@
  */
 package layouts;
 
+import ui.AllEventsPage;
 import ui.HomeScreen;
 
 /**
@@ -17,7 +18,7 @@ public class MainLayout extends javax.swing.JPanel {
      */
     public MainLayout() {
         initComponents();
-        pnlCenter.add(new HomeScreen());
+        pnlCenter.add(new AllEventsPage());
     }
 
     /**
@@ -71,6 +72,11 @@ public class MainLayout extends javax.swing.JPanel {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/house-solid.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         pnlSide.add(jButton1);
 
         jButton3.setBackground(new java.awt.Color(23, 25, 27));
@@ -131,11 +137,22 @@ public class MainLayout extends javax.swing.JPanel {
 
         pnlCenter.setBackground(new java.awt.Color(231, 237, 239));
         pnlCenter.setPreferredSize(new java.awt.Dimension(1200, 750));
-        pnlCenter.setLayout(new java.awt.BorderLayout(10, 10));
+        pnlCenter.setLayout(new java.awt.BorderLayout());
         pnlRoot.add(pnlCenter, java.awt.BorderLayout.CENTER);
 
         add(pnlRoot, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        pnlCenter.removeAll();
+        pnlCenter.revalidate();
+        pnlCenter.repaint();
+        
+        pnlCenter.add(new AllEventsPage());
+        
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
