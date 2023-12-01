@@ -6,6 +6,7 @@ package layouts;
 
 import ui.AllEventsPage;
 import ui.HomeScreen;
+import ui.ListsScreen;
 
 /**
  *
@@ -83,6 +84,11 @@ public class MainLayout extends javax.swing.JPanel {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/list-solid.png"))); // NOI18N
         jButton3.setBorder(null);
         jButton3.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         pnlSide.add(jButton3);
 
         jButton4.setBackground(new java.awt.Color(23, 25, 27));
@@ -153,6 +159,15 @@ public class MainLayout extends javax.swing.JPanel {
         
        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         pnlCenter.removeAll();
+        pnlCenter.revalidate();
+        pnlCenter.repaint();
+        
+        pnlCenter.add(new ListsScreen());
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
