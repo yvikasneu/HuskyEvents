@@ -8,6 +8,7 @@ import ui.AllEventsPage;
 import ui.FavouritesScreen;
 import ui.HomeScreen;
 import ui.ListsScreen;
+import ui.UserScreen;
 
 /**
  *
@@ -107,6 +108,11 @@ public class MainLayout extends javax.swing.JPanel {
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-solid.png"))); // NOI18N
         jButton5.setBorder(null);
         jButton5.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         pnlSide.add(jButton5);
 
         pnlRoot.add(pnlSide, java.awt.BorderLayout.WEST);
@@ -126,6 +132,7 @@ public class MainLayout extends javax.swing.JPanel {
         jLabel1.setText("HUSKY EVENTS");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel1.setIconTextGap(5);
+        jLabel1.setPreferredSize(new java.awt.Dimension(300, 40));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,8 +140,8 @@ public class MainLayout extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,6 +189,14 @@ public class MainLayout extends javax.swing.JPanel {
         pnlCenter.add(new FavouritesScreen());
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        pnlCenter.removeAll();
+        pnlCenter.revalidate();
+        pnlCenter.repaint();
+        pnlCenter.add(new UserScreen());
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
