@@ -1,8 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package models;
+ */package models;
 
 /**
  *
@@ -13,16 +12,17 @@ public class User {
     private String email; 
     private String role; 
     private int id; 
-    private int password; 
+    private String password;
     
     
     public User(){};
 
-    public User(int id, String name, String email, String role){
+    public User(int id, String name, String email, String password, String role){
         this.name = name; 
         this.id = id; 
         this.role = role; 
         this.email = email; 
+        this.password = password;
     }
     
 
@@ -81,18 +81,20 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     /**
-     * @return the id
+     * @return the password
      */
-    public int getPassword() {
-        return id;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param id the id to set
+     * @param password the password to set
      */
-    public void setPassword(int id) {
-        this.id = id;
+    public void setPassword(String password) {
+        this.password = password;
     }
+    
+    
 }
