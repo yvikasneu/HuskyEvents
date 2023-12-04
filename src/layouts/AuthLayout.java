@@ -17,7 +17,6 @@ public class AuthLayout extends javax.swing.JPanel {
      */
     public AuthLayout() {
         initComponents();
-        
          pnlMainPanel.add(new LoginPanel(pnlMainPanel));
     }
 

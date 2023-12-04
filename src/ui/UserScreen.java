@@ -4,6 +4,10 @@
  */
 package ui;
 
+import config.Base;
+import layouts.AuthLayout;
+import layouts.MainLayout;
+
 /**
  *
  * @author kiran
@@ -119,6 +123,14 @@ public class UserScreen extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        var base = Base.getInstance();
+        base.setUser(null);
+        
+        var myPnl = base.getParentLayoutPanel();
+        myPnl.removeAll();
+        myPnl.revalidate();
+        myPnl.repaint();
+        myPnl.add(new AuthLayout());
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

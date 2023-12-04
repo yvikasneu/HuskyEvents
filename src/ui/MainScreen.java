@@ -4,29 +4,24 @@
  */
 package ui;
 
+import config.Base;
+import models.User;
+
 /**
  *
  * @author vikas
  */
 public class MainScreen extends javax.swing.JFrame {
     
-    boolean isAuth = true;
      
-
     /**
      * Creates new form MainScreen
      */
     public MainScreen() {
         initComponents();
-        
-        if(isAuth){
-          mainPanel.add(new layouts.MainLayout());
-        }else {
-          System.out.println("HELLO");
-          mainPanel.add(new layouts.AuthLayout());
-        }
-        
-        
+        var base = Base.getInstance();
+        base.setParentLayoutPanel(mainPanel);
+        mainPanel.add(new layouts.AuthLayout());
     }
 
     /**

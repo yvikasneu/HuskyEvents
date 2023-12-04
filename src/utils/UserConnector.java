@@ -4,12 +4,9 @@
  */
 package utils;
 
-import com.sun.jdi.connect.spi.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import models.User;
 import models.User;
 
 /**
@@ -17,7 +14,8 @@ import models.User;
  * @author Maddala Nikhila Devi
  */
 public class UserConnector {
-    public static void addUser(User user) {
+    
+    public static boolean addUser(User user) {
         //add to database
         String query = "INSERT INTO HuskyEvents.users(name, email, password, role) VALUES(?,?,?,?)";
         try (java.sql.Connection conn = DriverManager.getConnection(config.Config.DB_URL, config.Config.USERNAME, config.Config.PASSWORD)) {
@@ -27,18 +25,17 @@ public class UserConnector {
             stmt.setString(3, user.getPassword());
             stmt.setString(4, user.getRole());
             int rows = stmt.executeUpdate();
-            System.out.println("Rows impacted : " + rows);
+            return true;
 //            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
     
     
-    public static User loginUser(User user) {
-        //add to database
-        String query = "SELECT * FROM HuskyEvents.users WHERE Email = '" + user.getEmail() + "';";
-        System.out.println(query);
+public static User loginUser(User user) {
+       String query = "SELECT * FROM HuskyEvents.users WHERE Email = '" + user.getEmail() + "';";
        try (java.sql.Connection conn = DriverManager.getConnection(config.Config.DB_URL, config.Config.USERNAME, config.Config.PASSWORD)) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -56,15 +53,12 @@ public class UserConnector {
             return null;
                     
            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
 
-        }
     }
+}
+    
           
-    public static void main(String[] args) {
-       var res =  UserConnector.loginUser(new User(0,"null", "test@gmail.com", "1234", "null"));
-        System.out.println(res.getEmail() + " " + res.getPassword());
-    }
 }

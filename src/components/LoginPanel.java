@@ -4,7 +4,13 @@
  */
 package components;
 
+import config.Base;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import layouts.MainLayout;
+import models.User;
+import utils.UserConnector;
 
 /**
  *
@@ -112,6 +118,37 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String email = emailInput.getText();        
+        String password = passwordInput.getText();
+        
+        if(email.isEmpty() || !utils.Utils.isValidEmailAddress(email)){
+            JOptionPane.showMessageDialog(this, "Please enter a vaild email.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else if(password.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter a vaild password.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }else {
+            
+            User currentUser = new User(); 
+            currentUser.setEmail(email);
+            currentUser.setPassword(password);
+            User loginUser = UserConnector.loginUser(currentUser);
+            if(loginUser != null){
+                Base base = Base.getInstance(); 
+                base.setUser(loginUser);
+                var parentPanel = base.getParentLayoutPanel();
+                parentPanel.removeAll();
+                parentPanel.revalidate();
+                parentPanel.repaint();
+                parentPanel.add(new MainLayout());
+            }else {
+                JOptionPane.showMessageDialog(this, "Invaild Email or Password", "Incorrect login details", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        }
+        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

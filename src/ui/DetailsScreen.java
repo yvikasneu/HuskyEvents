@@ -1,20 +1,63 @@
+package ui;
+
+import components.CommentItem;
+import config.Base;
+import models.Event;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import models.Comment;
+import models.Order;
+import utils.CommentConnector;
+import utils.OrderConnector;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui;
 
 /**
  *
- * @author Lenovo
+ * @author Likitha
  */
 public class DetailsScreen extends javax.swing.JPanel {
+        Event event;
+        Order order; 
 
     /**
      * Creates new form DetailsScreen
      */
-    public DetailsScreen() {
+    public DetailsScreen(Event event) {
         initComponents();
+        this.event = event;
+        
+        var base = Base.getInstance();
+        var order = OrderConnector.getOrder(event.getId(), base.getUser().getId());
+        if(order != null){
+            jButton4.setText("Deregister");
+        }
+        
+        this.order = order;
+        System.out.print(order);
+
+        
+        titleLabel.setText(event.getTitle());
+        locationLabel.setText(event.getLocation());
+        dateLabel.setText(event.getDate().toString());
+        maxSlotsLabel.setText(Integer.toString(event.getMaxSlots()));
+        availableSlotsLabel.setText(Integer.toString(event.getAvaibleSlots()));
+        priceLabel.setText(Float.toString(event.getPrice()));
+        var imageIcon = new ImageIcon(event.getImage());
+        Image scaledImage = imageIcon.getImage().getScaledInstance(400,200,Image.SCALE_SMOOTH);
+        targetImageLabel.setIcon(new ImageIcon(scaledImage));
+        
+        
+        var comments = CommentConnector.getAllCommentssByEvent(event.getId());
+        
+        for (Comment comment: comments){
+            commentsPanel.add(new CommentItem(comment));
+        
+        }
     }
 
     /**
@@ -26,19 +69,312 @@ public class DetailsScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        imageLabel = new javax.swing.JPanel();
+        targetImageLabel = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        maxSlotsLabel = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        locationLabel = new javax.swing.JLabel();
+        availableSlotsLabel = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        priceLabel = new javax.swing.JLabel();
+        descriptionLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        commentsPanel = new javax.swing.JPanel();
+        commentInput = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(1120, 750));
+
+        jLabel1.setBackground(new java.awt.Color(20, 104, 171));
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(20, 104, 171));
+        jLabel1.setText("Comments");
+
+        imageLabel.setPreferredSize(new java.awt.Dimension(400, 200));
+
+        targetImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/WhatsApp Image 2023-11-29 at 10.42.32 PM (1).jpeg"))); // NOI18N
+        targetImageLabel.setPreferredSize(new java.awt.Dimension(400, 200));
+
+        javax.swing.GroupLayout imageLabelLayout = new javax.swing.GroupLayout(imageLabel);
+        imageLabel.setLayout(imageLabelLayout);
+        imageLabelLayout.setHorizontalGroup(
+            imageLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(targetImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        imageLabelLayout.setVerticalGroup(
+            imageLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(imageLabelLayout.createSequentialGroup()
+                .addComponent(targetImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        titleLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        titleLabel.setText("Canada Day Celebrations");
+
+        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel6.setText("Location: ");
+
+        maxSlotsLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        maxSlotsLabel.setText("50");
+
+        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel8.setText("Date: ");
+
+        dateLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        dateLabel.setText("12-22-23");
+
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel10.setText("Max Slots: ");
+
+        locationLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        locationLabel.setText("Kings St, Toronto, MXA A33");
+
+        availableSlotsLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        availableSlotsLabel.setText("30");
+
+        jLabel13.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel13.setText("Available Slots:");
+
+        jLabel14.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel14.setText("Price:");
+
+        priceLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        priceLabel.setText("50$");
+
+        descriptionLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        descriptionLabel.setText("Kings St, Toronto, MXA A33");
+        descriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        descriptionLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel7.setText("Location: ");
+
+        jButton4.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jButton4.setText("Register");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 690));
+
+        commentsPanel.setBackground(new java.awt.Color(204, 204, 204));
+        commentsPanel.setLayout(new java.awt.GridLayout(20, 1, 5, 5));
+        jScrollPane1.setViewportView(commentsPanel);
+
+        jButton5.setText("Comment");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(commentInput, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(commentInput, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+
+        jLabel2.setBackground(new java.awt.Color(20, 104, 171));
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(20, 104, 171));
+        jLabel2.setText("Event Details");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(titleLabel)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(locationLabel))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel13)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(availableSlotsLabel))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateLabel))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(maxSlotsLabel))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(priceLabel))
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(213, 213, 213))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(titleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(locationLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(dateLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(maxSlotsLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(availableSlotsLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(priceLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(149, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if(order == null){
+             var newOrder = new Order(); 
+             var base = Base.getInstance();
+
+        newOrder.setEvent_id(this.event.getId());
+        newOrder.setUser_id(base.getUser().getId());
+        
+        var res =  OrderConnector.addOrder(newOrder);
+        var order = OrderConnector.getOrder(event.getId(), base.getUser().getId());
+        this.order = order;
+        
+        if(res){
+            jButton4.setText("Deregister");
+            JOptionPane.showMessageDialog(this, "You are successfully registered for this event.", "Registeration successful", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        }else {
+           var res = OrderConnector.deleteOrder(order);
+           
+           if(res){
+              this.order = null;
+              jButton4.setText("Register");
+              JOptionPane.showMessageDialog(this, "You are successfully Deregistered for this event.", "Deregisteration successful", JOptionPane.INFORMATION_MESSAGE);
+
+           }
+
+        }
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+        if(commentInput.getText().isEmpty()){}else {
+            var newComment = new Comment(); 
+            var base = Base.getInstance();
+            newComment.setAuthor(base.getUser().getName());
+            newComment.setEvent_id(event.getId());
+            newComment.setComment(commentInput.getText());
+            var res = CommentConnector.addComment(newComment);
+            
+            if(res){
+                 commentInput.setText("");
+                 commentsPanel.removeAll();
+                 commentsPanel.revalidate();
+                 commentsPanel.repaint();
+        
+                 var comments = CommentConnector.getAllCommentssByEvent(event.getId());
+        
+                 for (Comment comment: comments){
+                     commentsPanel.add(new CommentItem(comment));
+        
+                 }
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel availableSlotsLabel;
+    private javax.swing.JTextField commentInput;
+    private javax.swing.JPanel commentsPanel;
+    private javax.swing.JLabel dateLabel;
+    private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JPanel imageLabel;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel locationLabel;
+    private javax.swing.JLabel maxSlotsLabel;
+    private javax.swing.JLabel priceLabel;
+    private javax.swing.JLabel targetImageLabel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

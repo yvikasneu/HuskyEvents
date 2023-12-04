@@ -4,7 +4,11 @@
  */
 package components;
 
+import config.Base;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import models.User;
+import utils.UserConnector;
 
 /**
  *
@@ -119,6 +123,42 @@ public class RegisterPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String email = emailInput.getText();        
+        String password = passwordInput.getText();
+        String name = nameInput.getText();
+        if(name.isEmpty()){
+           JOptionPane.showMessageDialog(this, "Please enter a vaild name.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else if(email.isEmpty() || !utils.Utils.isValidEmailAddress(email)){
+            JOptionPane.showMessageDialog(this, "Please enter a vaild email.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else if(password.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter a vaild password.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }else {
+            
+            User currentUser = new User(); 
+            currentUser.setEmail(email);
+            currentUser.setPassword(password);
+            currentUser.setName(name);
+            currentUser.setRole("regular");
+            boolean success = UserConnector.addUser(currentUser);
+            if(success){
+                Base base = Base.getInstance();
+                emailInput.setText("");                
+                nameInput.setText("");
+                passwordInput.setText("");
+
+               
+                JOptionPane.showMessageDialog(this, "Your account has been registered.", "Registration  Success", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(this, "Something went wrong. Please try again!", "Registration Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

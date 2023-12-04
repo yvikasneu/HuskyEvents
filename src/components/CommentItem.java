@@ -8,7 +8,11 @@ import models.Comment;
 
 /**
  *
+<<<<<<< HEAD
  * @author Maddala Nikhila Devi
+=======
+ * @author vikas
+>>>>>>> feat/bug-fixes
  */
 public class CommentItem extends javax.swing.JPanel {
 
