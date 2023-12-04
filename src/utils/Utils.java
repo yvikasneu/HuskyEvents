@@ -5,11 +5,12 @@
 package utils;
 
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 import javax.swing.JButton;
 
 /**
  *
- * @author vikas
+ * @author Maddala Nikhila Devi
  */
 public class Utils {
     public static JButton copyButtonStyles(JButton originalButton) {
@@ -31,5 +32,18 @@ public class Utils {
         }
 
         return clonedButton;
+    }
+    
+    
+    public static boolean isValidEmailAddress(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                            "[a-zA-Z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                            "A-Z]{2,7}$"; 
+                              
+        Pattern pat = Pattern.compile(emailRegex); 
+        if (email == null) 
+            return false; 
+        return pat.matcher(email).matches(); 
     }
 }
