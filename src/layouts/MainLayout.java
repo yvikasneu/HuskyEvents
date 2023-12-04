@@ -25,6 +25,14 @@ public class MainLayout extends javax.swing.JPanel {
     public MainLayout() {
         initComponents();
         var base = Base.getInstance();
+        String role = base.getUser().getRole(); 
+        System.out.println(base.getUser().getName());
+        System.out.println(role);
+        System.out.println("admin");
+        System.out.println(role.trim().equals("admin"));
+        if(!role.equals("admin") ){
+            addButton.setVisible(false);
+        }
         base.setMainCenterPnl(pnlCenter);
         pnlCenter.add(new AllEventsPage());
     }
@@ -45,7 +53,7 @@ public class MainLayout extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
         pnlNav = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -121,16 +129,16 @@ public class MainLayout extends javax.swing.JPanel {
         });
         pnlSide.add(jButton5);
 
-        jButton6.setBackground(new java.awt.Color(23, 25, 27));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus-solid (1).png"))); // NOI18N
-        jButton6.setBorder(null);
-        jButton6.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        addButton.setBackground(new java.awt.Color(23, 25, 27));
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus-solid (1).png"))); // NOI18N
+        addButton.setBorder(null);
+        addButton.setPreferredSize(new java.awt.Dimension(50, 50));
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
-        pnlSide.add(jButton6);
+        pnlSide.add(addButton);
 
         pnlRoot.add(pnlSide, java.awt.BorderLayout.WEST);
 
@@ -215,22 +223,22 @@ public class MainLayout extends javax.swing.JPanel {
         pnlCenter.add(new UserScreen());
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
         
         pnlCenter.removeAll();
         pnlCenter.revalidate();
         pnlCenter.repaint();
         pnlCenter.add(new AdminScreen());
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_addButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

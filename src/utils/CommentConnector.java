@@ -61,6 +61,21 @@ public class CommentConnector {
             return false;
         }
     }
+     
+       public static boolean deleteComment(Comment comment) {
+        String query = "delete from HuskyEvents.Comments where id = ?";
+
+        try (java.sql.Connection conn = DriverManager.getConnection(config.Config.DB_URL, config.Config.USERNAME, config.Config.PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, comment.getId());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     
     
     

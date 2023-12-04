@@ -59,6 +59,30 @@ public static User loginUser(User user) {
 
     }
 }
+
+
+    /**
+     * Edit given user details in the database
+     * @param oldUser existing user in database
+     * @param newUser modified user details to be added
+     */
+    public static User editUser(User oldUser, User newUser) {
+        String query = "UPDATE HuskyEvents.users SET name=?, email=?, password=? WHERE id=?";
+
+        try (Connection conn = DriverManager.getConnection(config.Config.DB_URL, config.Config.USERNAME, config.Config.PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, newUser.getName());
+            stmt.setString(2, newUser.getEmail());
+            stmt.setString(3, newUser.getPassword());
+            stmt.setInt(4, oldUser.getId());
+            stmt.executeUpdate();
+            
+            return newUser;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
           
 }
