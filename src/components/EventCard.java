@@ -4,17 +4,37 @@
  */
 package components;
 
+import config.Base;
+import models.Event;
+import javax.swing.ImageIcon;
+import ui.DetailsScreen;
+
 /**
  *
  * @author vikas
  */
 public class EventCard extends javax.swing.JPanel {
+    Event event;
 
     /**
      * Creates new form EventCard
      */
     public EventCard() {
         initComponents();
+    }
+    
+    public EventCard(Event event){
+        initComponents();
+        this.event = event;
+        titleLabel.setText(event.getTitle());
+        locationLabel.setText(event.getLocation());
+        dateLabel.setText(event.getDate().toString());
+        maxSlotsLabel.setText(Integer.toString(event.getMaxSlots()));
+        availableSlotsLabel.setText(Integer.toString(event.getAvaibleSlots()));
+        priceLabel.setText(Float.toString(event.getPrice()));
+        var imageIcon = new ImageIcon(event.getImage());
+       jLabel1.setIcon(imageIcon);
+        
     }
 
     /**
@@ -27,57 +47,66 @@ public class EventCard extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel6 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        imageLabel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        maxSlotsLabel = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        locationLabel = new javax.swing.JLabel();
+        availableSlotsLabel = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        priceLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(300, 500));
+
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setPreferredSize(new java.awt.Dimension(300, 450));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        imageLabel.setPreferredSize(new java.awt.Dimension(250, 200));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/WhatsApp Image 2023-11-29 at 10.42.32 PM (1).jpeg"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(250, 150));
+
+        javax.swing.GroupLayout imageLabelLayout = new javax.swing.GroupLayout(imageLabel);
+        imageLabel.setLayout(imageLabelLayout);
+        imageLabelLayout.setHorizontalGroup(
+            imageLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 203, Short.MAX_VALUE)
+        imageLabelLayout.setVerticalGroup(
+            imageLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(imageLabelLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel5.setText("Canada Day Celebrations");
+        titleLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        titleLabel.setText("Canada Day Celebrations");
 
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel6.setText("Location: ");
 
-        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel7.setText("50");
+        maxSlotsLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        maxSlotsLabel.setText("50");
 
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel8.setText("Date: ");
 
-        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel9.setText("12-22-23");
+        dateLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        dateLabel.setText("12-22-23");
 
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel10.setText("Max Slots: ");
 
-        jLabel11.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel11.setText("Kings St, Toronto, MXA A33");
+        locationLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        locationLabel.setText("Kings St, Toronto, MXA A33");
 
-        jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel12.setText("30");
+        availableSlotsLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        availableSlotsLabel.setText("30");
 
         jLabel13.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel13.setText("Available Slots:");
@@ -85,8 +114,8 @@ public class EventCard extends javax.swing.JPanel {
         jLabel14.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel14.setText("Price:");
 
-        jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel15.setText("50$");
+        priceLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        priceLabel.setText("50$");
 
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jButton1.setText("View More");
@@ -100,66 +129,67 @@ public class EventCard extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                    .addComponent(titleLabel)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel11))
+                        .addComponent(locationLabel))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15))
+                        .addComponent(availableSlotsLabel))
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                             .addComponent(jLabel8)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9))
+                            .addComponent(dateLabel))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                             .addComponent(jLabel10)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel7)))
+                            .addComponent(maxSlotsLabel)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(priceLabel))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(titleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel11))
+                    .addComponent(locationLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(dateLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel7))
+                    .addComponent(maxSlotsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel12))
+                    .addComponent(availableSlotsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel15))
-                .addGap(18, 18, 18)
+                    .addComponent(priceLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -186,23 +216,31 @@ public class EventCard extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        var base = Base.getInstance();
+        var pnlCenter = base.getMainCenterPnl();
+        pnlCenter.removeAll();
+        pnlCenter.revalidate();
+        pnlCenter.repaint();
+        
+        pnlCenter.add(new DetailsScreen(event));
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel availableSlotsLabel;
+    private javax.swing.JLabel dateLabel;
+    private javax.swing.JPanel imageLabel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel locationLabel;
+    private javax.swing.JLabel maxSlotsLabel;
+    private javax.swing.JLabel priceLabel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

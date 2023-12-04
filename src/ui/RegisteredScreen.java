@@ -5,23 +5,26 @@
 package ui;
 
 import components.EventCard;
+import config.Base;
+import utils.EventConnector;
 
 /**
  *
  * @author vikas
  */
-public class FavouritesScreen extends javax.swing.JPanel {
+public class RegisteredScreen extends javax.swing.JPanel {
 
     /**
      * Creates new form AllEventsPage
      */
-    public FavouritesScreen() {
+    public RegisteredScreen() {
         initComponents();
         
+        var user = Base.getInstance().getUser();
+        var events = EventConnector.getAllRegisteredEvents(user.getId());
         
-        for (int i = 0; i <= 7; i++){
-            
-            upcomingGrid.add(new EventCard());
+        for (var event: events){
+            upcomingGrid.add(new EventCard(event));
             
         }
     }
@@ -49,12 +52,12 @@ public class FavouritesScreen extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(20, 104, 171));
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(20, 104, 171));
-        jLabel1.setText("View All Your Favourite Events Here !");
+        jLabel1.setText("All your registed events are here!");
 
         jLabel2.setBackground(new java.awt.Color(20, 104, 171));
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(20, 104, 171));
-        jLabel2.setText("My Favourites");
+        jLabel2.setText("My Events");
 
         upcomingGrid.setPreferredSize(new java.awt.Dimension(230, 1550));
         upcomingGrid.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 15));
@@ -66,14 +69,13 @@ public class FavouritesScreen extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(upcomingGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 964, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jLabel1)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))))
                 .addContainerGap(150, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

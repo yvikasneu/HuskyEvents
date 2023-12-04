@@ -4,11 +4,26 @@
  */
 package ui;
 
+import models.Event;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import utils.EventConnector;
+
 /**
  *
  * @author vikas
  */
 public class AdminScreen extends javax.swing.JPanel {
+    JFileChooser chooser;
+    BufferedImage img;
+    String filename;
+    File file ; 
 
     /**
      * Creates new form AdminScreen
@@ -27,20 +42,25 @@ public class AdminScreen extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        emailInput = new javax.swing.JTextField();
+        titleInput = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        emailInput1 = new javax.swing.JTextField();
-        emailInput2 = new javax.swing.JTextField();
+        locationInput = new javax.swing.JTextField();
+        priceInput = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        descriptionInput = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        targetText = new javax.swing.JLabel();
+        dateInput = new com.toedter.calendar.JDateChooser();
+        maxSlotsInput = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        categoryInput = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(1120, 750));
 
@@ -50,7 +70,7 @@ public class AdminScreen extends javax.swing.JPanel {
         jLabel1.setText("Add New Event");
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel2.setText("Name");
+        jLabel2.setText("Title");
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("Location");
@@ -64,9 +84,9 @@ public class AdminScreen extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel6.setText("Descripition");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        descriptionInput.setColumns(20);
+        descriptionInput.setRows(5);
+        jScrollPane1.setViewportView(descriptionInput);
 
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jButton1.setText("Save");
@@ -80,42 +100,65 @@ public class AdminScreen extends javax.swing.JPanel {
         jLabel7.setText("Cover photo");
 
         jButton2.setText("Select Image");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jLabel8.setText("No Image Selected");
+        targetText.setText("No Image Selected");
+
+        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel8.setText("Max Slots");
+
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel9.setText("Category");
+
+        categoryInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Music", "Party", "Cultural", "Entertainment", "Sport" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel4)
-                                        .addComponent(emailInput2, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(emailInput, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
-                                        .addComponent(jLabel1)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(emailInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 17, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2)
-                            .addComponent(jLabel8))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jButton2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(targetText)))
+                                .addGap(687, 687, 687))
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(maxSlotsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3)
+                                    .addComponent(locationInput, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel4)
+                                .addComponent(priceInput, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addComponent(titleInput, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                                .addComponent(jLabel1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel9)
+                            .addComponent(categoryInput, 0, 368, Short.MAX_VALUE))))
                 .addGap(300, 300, 300))
         );
         layout.setVerticalGroup(
@@ -124,24 +167,23 @@ public class AdminScreen extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emailInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel4)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emailInput2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(titleInput, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(54, 54, 54)))
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(categoryInput)))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dateInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(priceInput, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
                 .addGap(29, 29, 29)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -151,22 +193,95 @@ public class AdminScreen extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addComponent(targetText)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(maxSlotsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(locationInput, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        String title = titleInput.getText();        
+        String description = descriptionInput.getText();
+        String location = locationInput.getText();
+        String price = priceInput.getText();
+        Date date = dateInput.getDate();
+        String maxSlots = maxSlotsInput.getText();
+        int selectedIndex = categoryInput.getSelectedIndex();
+        
+        
+        if(title.isEmpty()){
+           JOptionPane.showMessageDialog(this, "Please enter a vaild title.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else if(description.isEmpty()){
+          JOptionPane.showMessageDialog(this, "Please enter a vaild description.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+        else if(location.isEmpty()){
+          JOptionPane.showMessageDialog(this, "Please enter a vaild location.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(price.isEmpty()){
+          JOptionPane.showMessageDialog(this, "Please enter a valid price.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(date == null){
+          JOptionPane.showMessageDialog(this, "Please enter a valid date.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }else if (file == null){
+          JOptionPane.showMessageDialog(this, "Please select the cover image", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }else if (maxSlots.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter valid maximum slots", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        
+        }
+        else {
+            
+            var event = new Event(); 
+            event.setTitle(title);
+            event.setDate(date);
+            event.setPrice(Float.parseFloat(price));
+            event.setLocation(location);
+            event.setDescription(description);
+            event.setFile(file);
+            event.setCategory_id(selectedIndex);
+            event.setMaxSlots(Integer.parseInt(maxSlots));
+            var res = EventConnector.addEvent(event);
+            if(res){
+                 JOptionPane.showMessageDialog(this, "Saved the event.", "Event saved", JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(this, "Something went wrong. Please try again!", "Event Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        file = chooser.getSelectedFile();
+        
+        if(file != null){
+            targetText.setText(file.getName());
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField emailInput;
-    private javax.swing.JTextField emailInput1;
-    private javax.swing.JTextField emailInput2;
+    private javax.swing.JComboBox<String> categoryInput;
+    private com.toedter.calendar.JDateChooser dateInput;
+    private javax.swing.JTextArea descriptionInput;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -177,7 +292,12 @@ public class AdminScreen extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField locationInput;
+    private javax.swing.JTextField maxSlotsInput;
+    private javax.swing.JTextField priceInput;
+    private javax.swing.JLabel targetText;
+    private javax.swing.JTextField titleInput;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
 package ui;
 
 import components.EventCard;
+import utils.EventConnector;
 
 /**
  *
@@ -17,11 +18,10 @@ public class AllEventsPage extends javax.swing.JPanel {
      */
     public AllEventsPage() {
         initComponents();
+        var events = EventConnector.getAllEvents();
         
-        
-        for (int i = 0; i <= 7; i++){
-            
-            upcomingGrid.add(new EventCard());
+        for (var event: events){
+            upcomingGrid.add(new EventCard(event));
             
         }
     }
@@ -57,7 +57,7 @@ public class AllEventsPage extends javax.swing.JPanel {
         jLabel2.setText("Ongoing Events");
 
         upcomingGrid.setPreferredSize(new java.awt.Dimension(230, 1550));
-        upcomingGrid.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 15));
+        upcomingGrid.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 15));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

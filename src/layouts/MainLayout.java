@@ -4,10 +4,11 @@
  */
 package layouts;
 
+import config.Base;
 import javax.swing.JButton;
 import ui.AdminScreen;
 import ui.AllEventsPage;
-import ui.FavouritesScreen;
+import ui.RegisteredScreen;
 import ui.HomeScreen;
 import ui.ListsScreen;
 import ui.UserScreen;
@@ -23,6 +24,8 @@ public class MainLayout extends javax.swing.JPanel {
      */
     public MainLayout() {
         initComponents();
+        var base = Base.getInstance();
+        base.setMainCenterPnl(pnlCenter);
         pnlCenter.add(new AllEventsPage());
     }
 
@@ -200,7 +203,7 @@ public class MainLayout extends javax.swing.JPanel {
         pnlCenter.removeAll();
         pnlCenter.revalidate();
         pnlCenter.repaint();
-        pnlCenter.add(new FavouritesScreen());
+        pnlCenter.add(new RegisteredScreen());
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
