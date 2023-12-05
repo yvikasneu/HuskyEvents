@@ -18,7 +18,7 @@ import utils.OrderConnector;
 
 /**
  *
- * @author Likitha
+ * @author vikas
  */
 public class DetailsScreen extends javax.swing.JPanel {
         Event event;
@@ -32,6 +32,13 @@ public class DetailsScreen extends javax.swing.JPanel {
         this.event = event;
         
         var base = Base.getInstance();
+        var role = base.getUser().getRole();
+        
+        if(role.equals("guest")){
+            jButton4.setVisible(false);
+            jButton5.setVisible(false);
+        }   
+        
         var order = OrderConnector.getOrder(event.getId(), base.getUser().getId());
         if(order != null){
             jButton4.setText("Deregister");
@@ -55,7 +62,7 @@ public class DetailsScreen extends javax.swing.JPanel {
         var comments = CommentConnector.getAllCommentssByEvent(event.getId());
         
         for (Comment comment: comments){
-            commentsPanel.add(new CommentItem(comment));
+            commentsPanel.add(new CommentItem(comment, commentsPanel, event));
         
         }
     }
@@ -344,7 +351,7 @@ public class DetailsScreen extends javax.swing.JPanel {
                  var comments = CommentConnector.getAllCommentssByEvent(event.getId());
         
                  for (Comment comment: comments){
-                     commentsPanel.add(new CommentItem(comment));
+                     commentsPanel.add(new CommentItem(comment, commentsPanel, event));
         
                  }
             }

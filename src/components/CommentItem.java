@@ -4,7 +4,10 @@
  */
 package components;
 
+import config.Base;
+import javax.swing.JPanel;
 import models.Comment;
+import models.Event;
 import utils.CommentConnector;
 
 /**
@@ -17,15 +20,30 @@ import utils.CommentConnector;
  */
 public class CommentItem extends javax.swing.JPanel {
     Comment comment;
+    JPanel parentPanel;
+    Event event;
     /**
      * Creates new form Comment
      */
-    public CommentItem(Comment comment) {
+    public CommentItem(Comment comment, JPanel parentPanel, Event event) {
         initComponents();
         this.comment = comment;
+        this.parentPanel = parentPanel;
+        this.event = event; 
+       
         
         authorLabel.setText(comment.getAuthor());
         commentLabel.setText(comment.getComment());
+        
+        Base base = Base.getInstance();
+        var user = base.getUser();
+         System.out.println(user.getRole());
+        if(!user.getRole().equals("admin") && !user.getRole().equals("mod")){
+            jButton1.setVisible(false);
+        }
+        
+        
+        
     }
 
     /**
@@ -97,6 +115,15 @@ public class CommentItem extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         CommentConnector.deleteComment(comment);
+        var comments = CommentConnector.getAllCommentssByEvent(event.getId());
+        parentPanel.removeAll();
+        parentPanel.revalidate();
+        parentPanel.repaint();
+        
+        for (Comment comment: comments){
+            parentPanel.add(new CommentItem(comment, parentPanel, event));
+        
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

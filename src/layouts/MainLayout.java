@@ -33,6 +33,9 @@ public class MainLayout extends javax.swing.JPanel {
         if(!role.equals("admin") ){
             addButton.setVisible(false);
         }
+        if(role.equals("guest") ){
+            starButton.setVisible(false);
+        }
         base.setMainCenterPnl(pnlCenter);
         pnlCenter.add(new AllEventsPage());
     }
@@ -51,7 +54,7 @@ public class MainLayout extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        starButton = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         pnlNav = new javax.swing.JPanel();
@@ -107,16 +110,16 @@ public class MainLayout extends javax.swing.JPanel {
         });
         pnlSide.add(jButton3);
 
-        jButton4.setBackground(new java.awt.Color(23, 25, 27));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/star-solid.png"))); // NOI18N
-        jButton4.setBorder(null);
-        jButton4.setPreferredSize(new java.awt.Dimension(50, 50));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        starButton.setBackground(new java.awt.Color(23, 25, 27));
+        starButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/star-solid.png"))); // NOI18N
+        starButton.setBorder(null);
+        starButton.setPreferredSize(new java.awt.Dimension(50, 50));
+        starButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                starButtonActionPerformed(evt);
             }
         });
-        pnlSide.add(jButton4);
+        pnlSide.add(starButton);
 
         jButton5.setBackground(new java.awt.Color(23, 25, 27));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-solid.png"))); // NOI18N
@@ -206,14 +209,14 @@ public class MainLayout extends javax.swing.JPanel {
         pnlCenter.add(new ListsScreen());
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void starButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_starButtonActionPerformed
         // TODO add your handling code here:
         pnlCenter.removeAll();
         pnlCenter.revalidate();
         pnlCenter.repaint();
         pnlCenter.add(new RegisteredScreen());
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_starButtonActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -237,7 +240,6 @@ public class MainLayout extends javax.swing.JPanel {
     private javax.swing.JButton addButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -246,5 +248,6 @@ public class MainLayout extends javax.swing.JPanel {
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlRoot;
     private javax.swing.JPanel pnlSide;
+    private javax.swing.JButton starButton;
     // End of variables declaration//GEN-END:variables
 }

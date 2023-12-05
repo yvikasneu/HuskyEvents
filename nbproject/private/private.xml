@@ -3,15 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/utils/OrderConnector.java</file>
             <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/ui/UserScreen.java</file>
-            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/layouts/AuthLayout.java</file>
-            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/ui/AdminScreen.java</file>
             <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/ui/AllEventsPage.java</file>
             <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/ui/MainScreen.java</file>
-            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/components/EventCard.java</file>
-            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/layouts/MainLayout.java</file>
+            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/utils/CommentConnector.java</file>
             <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/utils/UserConnector.java</file>
             <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/models/User.java</file>
+            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/components/CommentItem.java</file>
+            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/ui/DetailsScreen.java</file>
+            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/ui/HomeScreen.java</file>
+            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/layouts/AuthLayout.java</file>
+            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/ui/AdminScreen.java</file>
+            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/components/EventCard.java</file>
+            <file>file:/Users/vikas/NetBeansProjects/EventManagementPortal/src/layouts/MainLayout.java</file>
         </group>
     </open-files>
 </project-private>
